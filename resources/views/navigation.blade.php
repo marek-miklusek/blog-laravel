@@ -118,9 +118,12 @@
 	@auth
 
 		{{-- Logged in user --}}
-		<a href="/users/{{ auth()->user()->id }}">
+		<a href="user/{{ auth()->user()->id }}">
 			@<strong>{{ auth()->user()->name }}</strong>
 		</a>
+
+        {{-- User's profile --}}
+        <a href="/profile" class="profile-link">profile</a>
 
         {{-- Add post --}}
         <a href="/posts/create">

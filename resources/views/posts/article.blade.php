@@ -6,13 +6,15 @@
 		</h2>
     </header>
 
-	<div>
-		<p>{!! nl2br($post->text) !!}</p>
-	</div>
+	@if ($type == 'full')
+		<p>{!! $post->format_text !!}</p>
+	@else
+		<p>{{ $post->teaser }}</p>
+	@endif
 
 	<footer class="d-flex">
 
-		<a href="/users/{{ $post->user->id}}" class="author">
+		<a href="/users/{{ $post->user->id }}" class="author">
 			@<strong>{{ $post->user->name }}</strong>
 		</a>
 
@@ -20,9 +22,11 @@
 			{{ $post->comments->count() }} <strong>{{ Str::plural('comment', $post->comments->count()) }}</strong>
 		</a>
 
+		<p class="post-created-at">{{ $post->created_at }}</p>
+
 		@can('update', $post)
 
-			<a href="/posts/{{ $post->slug }}/edit" class="post-edit-btn">edit post</a>
+			<a href="/posts/{{ $post->slug }}/edit" class="post-edit-btn">edit</a>
 
 			<form action="/posts/{{ $post->slug }}" method="POST">
                 @csrf
@@ -35,3 +39,4 @@
 	</footer>
 
 </article>
+

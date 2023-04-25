@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Post extends Model
 {
@@ -36,4 +37,23 @@ class Post extends Model
         return $this->hasMany(Comment::class)->latest();
     }
 
+
+    // Format created_at (accessors)
+    public function getCreatedAtAttribute($value)
+    {
+        return date('j M Y, H:i', strtotime($value));
+    }
+
+
+    // Format text to teaser (accessors)
+    public function getTeaserAttribute()
+    {
+        return Str::words($this->text, 50);
+    }
+
+
+    public function getFormatTextAttribute()
+    {
+        return add_paragraphs(filter_url(e($this->text)));
+    }
 }

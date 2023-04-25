@@ -25,11 +25,15 @@ Route::middleware('auth')->group(function () {
 
     // Posts
     Route::resource('posts', PostController::class);
-
+ 
     // Comments
     Route::resource('comments', CommentController::class)->only([
         'store', 'update', 'destroy', 'edit'
     ]);
+
+    // User
+    Route::resource('users', UserController::class);
+
 });
 
 
