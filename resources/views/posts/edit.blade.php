@@ -7,7 +7,7 @@
     
     <div class="post-edit-form">
      
-        <form action="/posts/{{ $post->slug }}" method="POST">
+        <form action="{{ route('posts.update', $post->slug) }}" method="POST">
             @csrf
             @method('PATCH')
 

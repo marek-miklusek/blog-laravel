@@ -7,7 +7,7 @@
     
     <div class="comment-edit-form">
 
-        <form action="/comments/{{ $comment->id }}" method="POST">
+        <form action="{{ route('comments.update', $comment->id) }}" method="POST">
             @csrf
             @method('PATCH')
 

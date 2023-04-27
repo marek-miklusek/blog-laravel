@@ -118,21 +118,23 @@
 	@auth
 
 		{{-- Logged in user --}}
-		<a href="user/{{ auth()->user()->id }}">
+		<a href="{{ route('user', auth()->user()->id) }}">
 			@<strong>{{ auth()->user()->name }}</strong>
 		</a>
 
         {{-- User's profile --}}
-        <a href="/profile" class="profile-link">profile</a>
+        @if (Request::segment(1) == 'user')
+            <a href="{{ route('profile.edit') }}" class="profile-link">profile</a>
+        @endif
 
         {{-- Add post --}}
-        <a href="/posts/create">
+        <a href="{{ route('posts.create') }}">
 			<strong>create post</strong>
 		</a>
 
 		{{-- Logout link --}}
 		<a href="{{ route('logout') }}" class="logout-btn" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-			{{ __('Log Out') }}
+			Log Out
 		</a>
 
 		<form id="logout-form" method="POST" action="{{ route('logout') }}">
@@ -142,6 +144,4 @@
 	@endauth
 
 </nav>
-
-
 

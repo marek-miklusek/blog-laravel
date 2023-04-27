@@ -1,6 +1,6 @@
-<h4 class="profile-heading">Delete Account</h4>
+<h4 class="profile-heading mb-1">Delete Account</h4>
 
-<form method="POST" action="/profile">
+<form method="POST" action="{{ route('profile.destroy') }}">
     @csrf
     @method('delete')
 

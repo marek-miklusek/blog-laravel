@@ -6,7 +6,7 @@
 
     <footer class="comment-meta">
 
-        <a href="/users/{{ $comment->user->id }}" class="author">
+        <a href="{{ route('user', $comment->user->id) }}" class="author">
             @<strong>{{ $comment->user->name }}</strong>
         </a>
 
@@ -16,9 +16,9 @@
 
         @can('update', $comment)
 
-            <a href="/comments/{{ $comment->id }}/edit" class="comment-edit-btn">edit</a>
+            <a href="{{ route('comments.edit', $comment->id) }}" class="comment-edit-btn">edit</a>
 
-            <form action="/comments/{{ $comment->id }}" method="POST">
+            <form action="{{ route('comments.destroy', $comment->id) }}" method="POST">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn comment-delete-btn">x</button>

@@ -4,19 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use App\Http\Requests\SaveCommentRequest;
+use App\Http\Requests\UpdateCommentRequest;
 
 class CommentController extends Controller
 {
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(SaveCommentRequest $request)
     {
-        $request->validate([
-            'text' => 'required',
-            'post_id' => 'required|integer|exists:posts,id'
-        ]);
-
         $comment = auth()->user()->comments()->create(
             $request->all()
         );
@@ -31,6 +28,8 @@ class CommentController extends Controller
      */
     public function edit(Comment $comment)
     {
+        $this->authorize('update', $comment);
+
         return view('comments.edit', [
             'comment' => $comment
         ]);
@@ -39,18 +38,10 @@ class CommentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Comment $comment)
+    public function update(UpdateCommentRequest $request, Comment $comment)
     {
-        // When this returns true, we can continue in code bellow(CommentPolicy)
-        $this->authorize('update', $comment);
-
-        $request->validate([
-            'text' => 'required|unique:comments,text'
-        ]);
-
-        $comment->text = $request->text;
-        $comment->save();
-
+        $comment->update($request->all());
+        
         session()->flash('message', 'Your comment was updated');
         return redirect('/posts/'.$comment->post->slug.'#comments');
     }

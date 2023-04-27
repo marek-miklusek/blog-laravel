@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Requests\SavePostRequest;
+use App\Http\Requests\UpdatePostRequest;
 
 class PostController extends Controller
 {
@@ -33,21 +34,13 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(SavePostRequest $request)
     {
-        $request->validate([
-            'title' => 'required|unique:posts,title',
-            'text' => 'required'
-        ]);
-
-        $request['slug'] = Str::slug($request->title);
-
         auth()->user()->posts()->create(
             $request->all()
         );
 
         session()->flash('message', 'You created a new post');
-
         return redirect('/');
     }
 
@@ -71,6 +64,8 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {   
+        $this->authorize('update', $post);
+        
         return view('posts.edit', [
             'post' => $post
         ]);
@@ -80,21 +75,9 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Post $post)
+    public function update(UpdatePostRequest $request, Post $post)
     {
-        // When this returns true, we can continue in code bellow(PostPolicy)
-        $this->authorize('update', $post);
-
-        $request->validate([
-            'title' => 'required|unique:posts,title',
-            'text' => 'required|unique:posts,text'
-        ]);
-
-        $post->title = $request->title;
-        $post->text = $request->text;
-        $post->slug = Str::slug($request->title);
-
-        $post->save();
+        $post->update($request->all());
 
         session()->flash('message', 'Your post was updated');
         return redirect('/posts/'.$post->slug);

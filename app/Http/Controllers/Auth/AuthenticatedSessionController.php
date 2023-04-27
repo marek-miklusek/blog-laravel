@@ -29,7 +29,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        session()->flash('message', 'Great, you are logged in now!');
+        session()->flash('message', 'Great, '.auth()->user()->name.' you are logged in now!');
 
         return redirect()->intended(RouteServiceProvider::HOME);
     }

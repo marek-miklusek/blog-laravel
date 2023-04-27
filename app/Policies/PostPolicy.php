@@ -13,6 +13,6 @@ class PostPolicy
      */
     public function update(User $user, Post $post): bool
     {
-        return $post->user_id == $user->id;
+        return $post->user_id === $user->id;
     }
 }

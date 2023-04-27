@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,8 +33,9 @@ Route::middleware('auth')->group(function () {
     ]);
 
     // User
-    Route::resource('users', UserController::class);
-
+    Route::get('user/{id}', [UserController::class, 'index'])
+        ->where('id', '[0-9]+')->name('user');
+    
 });
 
 
@@ -49,3 +51,12 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+
+// Example how to use next segments in URI (segment can be optional{slug?})
+// plus regular expression
+// Route::get('whatever/{id}/{slug}', [PagesController::class, 'whatever'])
+//     // Condition with regular expression, only numbers
+//     ->where('id', '[0-9]+')
+//     // Condition with regular expression, only small letters and hyphens
+//     ->where('slug', '[a-z-]+');

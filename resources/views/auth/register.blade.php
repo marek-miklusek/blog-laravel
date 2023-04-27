@@ -92,7 +92,7 @@
         
         {{-- Confirm password --}}
         <div>
-            <input class="input" name="password_confirmation" type="password" placeholder="again password"/>
+            <input class="input" name="password_confirmation" type="password" placeholder="password again"/>
         </div>
 
         {{-- Already registered --}}

@@ -1,4 +1,4 @@
-<form action="/comments" method="post" class="comment-add-form">
+<form action="{{ route('comments.store') }}" method="post" class="comment-add-form">
 	@csrf
 
 	<div>

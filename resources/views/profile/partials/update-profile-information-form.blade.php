@@ -8,6 +8,6 @@
     
     <input name="email" type="email" value="{{ $user->email }}" required autocomplete="username" />
 
-    <p><button class="btn btn-outline-info mt-2">Save</button></p>
+    <p class="mb-0"><button class="btn btn-outline-info mt-2">Save</button></p>
 
 </form>

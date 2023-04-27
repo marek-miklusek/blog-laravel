@@ -7,17 +7,17 @@
     
     <div class="post-edit-form">
      
-        <form action="/posts" method="POST">
+        <form action="{{ route('posts.store') }}" method="POST">
             @csrf
 
             <h5 class="form-heading">Create post</h5>
             
-            <input type="text" name="title" placeholder="title" class="form-control mb-2">
+            <input type="text" name="title" value="{{ old('title') }}" class="form-control mb-2" placeholder="title" autofocus>
             @error('title')
                 <p class="errors">{{ $message }}</p>
             @enderror
 
-            <textarea class="form-control" name="text" rows="12" cols="70" placeholder="text"></textarea>
+            <textarea name="text" rows="12" cols="70" class="form-control" placeholder="text">{{ old('text') }}</textarea>
             @error('text')
                 <p class="errors">{{ $message }}</p>
             @enderror

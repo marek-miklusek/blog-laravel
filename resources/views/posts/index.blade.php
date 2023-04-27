@@ -1,10 +1,12 @@
 @extends('layouts.master')
 
 
-@section('title', 'Home')
+@section('title', isset($title) ? $title : 'Home')
     
 @section('content')
 
+    <h1 class="user-heading">{{ isset($title) ? $title : '' }}</h1>
+    
     <ol>
 
         @forelse ($posts as $post)
