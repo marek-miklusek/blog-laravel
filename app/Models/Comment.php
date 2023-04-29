@@ -14,6 +14,18 @@ class Comment extends Model
         'text', 'post_id'
     ];
 
+
+    // The newly created attributes are append to the object
+    protected $appends = [
+        //
+    ];
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Relationships between models (tables in DB)
+    |--------------------------------------------------------------------------
+    */
     
     // Get post this comment belongs to
     public function post()
@@ -27,5 +39,4 @@ class Comment extends Model
     {
         return $this->belongsTo(User::class);
     }
-
 }

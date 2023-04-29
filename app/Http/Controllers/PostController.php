@@ -36,12 +36,12 @@ class PostController extends Controller
      */
     public function store(SavePostRequest $request)
     {
-        auth()->user()->posts()->create(
+        $post = auth()->user()->posts()->create(
             $request->all()
         );
 
         session()->flash('message', 'You created a new post');
-        return redirect('/');
+        return redirect()->route('posts.show', $post->slug);
     }
 
 

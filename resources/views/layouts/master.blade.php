@@ -19,7 +19,7 @@
 
         <header>
             <h1 class="main-heading">
-                <a href="/" class="main-logo">(ಠ_ಠ)</a>
+                <a href="/" class="main-logo">(｡◕‿◕｡)</a>
             </h1>
         </header>
 

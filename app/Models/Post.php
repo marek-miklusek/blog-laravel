@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Post extends Model
@@ -25,6 +24,18 @@ class Post extends Model
     ];
 
 
+    // The newly created attributes are append to the object
+    protected $appends = [
+        //
+    ];
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Relationships between models (tables in DB)
+    |--------------------------------------------------------------------------
+    */
+
     // Get the Author of the blog post
     public function user()
     {
@@ -39,28 +50,47 @@ class Post extends Model
     }
 
 
-    // Format created_at (accessors)
+    /*
+    |--------------------------------------------------------------------------
+    | Accessors
+    |--------------------------------------------------------------------------
+    */
+
+    // Format created_at
     public function getCreatedAtAttribute($value)
     {
         return date('j M Y, H:i', strtotime($value));
     }
 
 
-    // Format text to teaser (accessors)
+    // Make datetime for HTML tag time
+    public function getDatetimeAttribute()
+    {
+        return date('Y-m-d', strtotime($this->created_at));
+    }
+
+
+    // Format text to teaser
     public function getTeaserAttribute()
     {
         return Str::words($this->text, 50);
     }
 
 
-    // Add paragraphs to text (accessors)
+    // Add paragraphs to text
     public function getFormatTextAttribute()
     {
         return add_paragraphs(filter_url(e($this->text)));
     }
 
 
-    // Add slug from title (mutators)
+    /*
+    |--------------------------------------------------------------------------
+    | Mutators
+    |--------------------------------------------------------------------------
+    */
+
+    // Add slug from title to DB
     public function setTitleAttribute($value)
     {   
         $this->attributes['title'] = $value;

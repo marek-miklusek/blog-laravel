@@ -45,6 +45,12 @@ class User extends Authenticatable
     ];
 
 
+    /*
+    |--------------------------------------------------------------------------
+    | Relationships between models (tables in DB)
+    |--------------------------------------------------------------------------
+    */
+
     // Get the posts of this author
     public function posts()
     {
@@ -57,5 +63,4 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comment::class);
     }
-
 }

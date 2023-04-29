@@ -17,8 +17,8 @@
 			add comment
 		</button>
 
-		@if(session('message'))
-			<p class="alert alert-success flash-message">{{ session('message') }}</p>
+		@if(session('message_c'))
+			<p class="alert alert-success flash-message">{{ session('message_c') }}</p>
 		@endif
 
 	</div>

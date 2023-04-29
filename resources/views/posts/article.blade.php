@@ -22,7 +22,7 @@
 			{{ $post->comments->count() }} <strong>{{ Str::plural('comment', $post->comments->count()) }}</strong>
 		</a>
 
-		<p class="post-created-at">{{ $post->created_at }}</p>
+		<time datetime="{{ $post->datetime }}" class="post-created-at">{{ $post->created_at }}</time>
 
 		@can('update', $post)
 

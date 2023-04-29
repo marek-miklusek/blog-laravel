@@ -18,7 +18,7 @@ class CommentController extends Controller
             $request->all()
         );
 
-        session()->flash('message', 'Your smart comment was added:)');
+        session()->flash('message_c', 'Your smart comment was added:)');
         return redirect('/posts/' . $comment->post->slug . '#comments');
     }
 
@@ -42,7 +42,7 @@ class CommentController extends Controller
     {
         $comment->update($request->all());
         
-        session()->flash('message', 'Your comment was updated');
+        session()->flash('message_c', 'Your comment was updated');
         return redirect('/posts/'.$comment->post->slug.'#comments');
     }
 
@@ -56,7 +56,7 @@ class CommentController extends Controller
     
         $comment->delete();
 
-        session()->flash('message', 'Your comment was deleted');
+        session()->flash('message_c', 'Your comment was deleted');
         return redirect('/posts/'.$comment->post->slug.'#comments');
     }
 }

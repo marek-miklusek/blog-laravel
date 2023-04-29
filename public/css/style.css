@@ -75,7 +75,7 @@ a {
 }
 
 .main-heading {
-   font-size: 5em;
+   font-size: 4em;
    margin-bottom: 0;
    text-align: center;
 }
@@ -151,8 +151,7 @@ a {
 
 .forgot-password-btn {
    background-color: #0d6efd;
-   margin-top: 1em;
-   padding: .5em 1.1em;
+   padding: .5em .8em;
 }
 
 .forgot-password-btn:hover {
