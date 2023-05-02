@@ -28,7 +28,7 @@
     <div class="container d-flex flex-wrap gap-2">
 
         @foreach ($tags as $tag)
-            <form action="{{ route('tags.destroy', $tag->tag) }}" method="Post">
+            <form action="{{ route('tags.destroy', urlencode($tag->tag)) }}" method="Post">
                 @csrf
                 @method('DELETE')
                 <button class="btn btn-dark">{{ $tag->tag }}<span class="tags-delete-btn">&times;</span></button>

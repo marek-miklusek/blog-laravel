@@ -118,7 +118,7 @@
 	@auth
 
 		{{-- Logged in user --}}
-		<a href="{{ route('user', auth()->user()->name) }}">
+		<a href="{{ route('user', urlencode(auth()->user()->name)) }}">
 			@<strong>{{ auth()->user()->name }}</strong>
 		</a>
 
@@ -128,7 +128,7 @@
         @endif
 
         {{-- Create post --}}
-        <a href="{{ route('posts.create') }}" class="post-create-btn">
+        <a href="{{ route('posts.create') }}">
             <strong>create post</strong>
 		</a>
 

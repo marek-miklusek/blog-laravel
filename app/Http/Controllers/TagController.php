@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\SaveTagRequest;
 
 class TagController extends Controller
@@ -13,7 +14,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        $tags = Tag::all();
+        $tags = Tag::latest()->get();
 
         return view('tags.create', [
             'tags' => $tags

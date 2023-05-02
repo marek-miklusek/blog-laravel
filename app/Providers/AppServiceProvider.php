@@ -26,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
         // Include $tags into view('partials.tags-form')
 	    view()->composer('tags.tags-form', function($view)
         {
-	        $view->with('tags', Tag::all());
+	        $view->with('tags', Tag::latest()->get());
         });
     }
 }

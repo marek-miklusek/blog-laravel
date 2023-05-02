@@ -25,6 +25,12 @@ class Tag extends Model
 	protected $fillable = ['tag'];
 
 
+    // The newly created attributes are append to the object
+    protected $appends = [
+        //
+    ];
+
+
     /*
     |--------------------------------------------------------------------------
     | Relationships between models (tables in DB)
@@ -43,13 +49,7 @@ class Tag extends Model
     | Accessors
     |--------------------------------------------------------------------------
     */
-
-    // public function getEncodedTagAttribute()
-    // {
-    //     return urlencode($this->tag);
-    // }
-
-    
+  
     // Urldecode if tag has more than 1 word before displaying
     public function getTagAttribute($value)
     {

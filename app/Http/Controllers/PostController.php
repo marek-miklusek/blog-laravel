@@ -121,9 +121,8 @@ class PostController extends Controller
     }
 }
 
-
 /*
 |--------------------------------------------------------------------------
-| All tags select in AppServiceProvider method boot()
+| All tags for edit and create select in AppServiceProvider method boot()
 |--------------------------------------------------------------------------
 */

@@ -56,15 +56,6 @@ a {
    padding-left: .7em;
 }
 
-.post-create-btn {
-   color: black;
-   font-size: 1.1em;
-}
-
-.post-create-btn:hover {
-   color: #fff;
-}
-
 .post-delete-btn {
    margin-left: 12px;
    color: #888;
