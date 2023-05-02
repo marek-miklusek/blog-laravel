@@ -4,62 +4,57 @@ namespace App\Http\Controllers;
 
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use App\Http\Requests\SaveTagRequest;
 
 class TagController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        $tags = Tag::all();
+
+        return view('tags.create', [
+            'tags' => $tags
+        ]);
     }
+
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(SaveTagRequest $request)
     {
-        //
+        Tag::create($request->all());
+
+        session()->flash('message', 'You created a new tag:)');
+        return back();
     }
+
 
     /**
      * Display the specified resource.
      */
-    public function show(Tag $tag)
-    {
-        //
-    }
+    public function show($tag)
+	{
+        $tag = Tag::whereTag($tag)->firstOrFail(); 
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Tag $tag)
-    {
-        //
+		return view('posts.index', [
+            'title' => $tag->tag,
+            'posts' => $tag->posts
+        ]);
     }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Tag $tag)
-    {
-        //
-    }
+    
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Tag $tag)
     {
-        //
+        $tag->delete();
+
+        session()->flash('message', 'Tag was deleted');
+        return back();
     }
 }

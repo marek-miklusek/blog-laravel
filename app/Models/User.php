@@ -3,14 +3,22 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+
+    // Get the route key for this model, default is (user/id)
+    // change it to (user/name)
+	public function getRouteKeyName()
+	{
+		return 'name';
+	}
+
 
     /**
      * The attributes that are mass assignable.
@@ -54,7 +62,7 @@ class User extends Authenticatable
     // Get the posts of this author
     public function posts()
     {
-        return $this->hasMany(Post::class);
+        return $this->hasMany(Post::class)->latest();
     }
 
 
@@ -62,5 +70,31 @@ class User extends Authenticatable
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Accessors
+    |--------------------------------------------------------------------------
+    */
+
+    // Urldecode if the name has more than 1 word before displaying
+    public function getNameAttribute($value)
+    {
+        return urldecode($value);
+    }
+
+    
+    /*
+    |--------------------------------------------------------------------------
+    | Mutators
+    |--------------------------------------------------------------------------
+    */
+
+    // Urlencode if the name has more than 1 word, before storing in DB
+    public function setNameAttribute($value)
+    {   
+        $this->attributes['name'] = urlencode($value);
     }
 }

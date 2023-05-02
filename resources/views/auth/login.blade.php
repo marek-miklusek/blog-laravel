@@ -38,13 +38,11 @@
         </div>
 
         @if (Route::has('password.request'))
-
             <p class="forgot-anchor">
                 <a href="{{ route('password.request') }}">
                     Forgot your password?
                 </a>
             </p>
-
         @endif
 
 	</form>

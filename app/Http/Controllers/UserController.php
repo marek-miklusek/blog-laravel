@@ -10,15 +10,15 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($id)
+    public function index($name)
     {
-        $user = User::findOrFail($id); 
+        $user = User::whereName($name)->firstOrFail(); 
 
         $this->authorize('view', $user);
 
         return view('posts.index', [
             'posts' => $user->posts,
-            'title' => 'my beautiful posts'
+            'title' => 'My beautiful posts'
         ]);
     }
 }

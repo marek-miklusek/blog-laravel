@@ -11,7 +11,7 @@
 			<textarea rows="3" class="textarea" name="text" placeholder="write your smart comment"></textarea>
 		</div>
 
-		@include('errors')
+		@include('partials.errors')
 
 		<button class="btn btn-dark comment-add-btn">
 			add comment

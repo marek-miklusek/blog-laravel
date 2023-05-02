@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\User;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TagController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CommentController;
@@ -26,16 +26,21 @@ Route::get('/', [PostController::class, 'index']);
 Route::middleware('auth')->group(function () {
 
     // Posts
-    Route::resource('posts', PostController::class);
+    Route::resource('posts', PostController::class)->except('index');
+	Route::get('posts/{post}/delete', [PostController::class, 'delete'])->name('posts.delete');
  
     // Comments
     Route::resource('comments', CommentController::class)->only([
         'store', 'update', 'destroy', 'edit'
     ]);
 
-    // User
-    Route::get('user/{id}', [UserController::class, 'index'])
-        ->where('id', '[0-9]+')->name('user');
+    // Tags
+    Route::resource('tags', TagController::class)->only([
+        'create', 'store', 'show', 'destroy'
+    ]);
+
+    // Users
+    Route::get('user/{name}', [UserController::class, 'index'])->name('user');
 
     // Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

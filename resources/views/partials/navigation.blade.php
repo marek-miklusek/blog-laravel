@@ -118,7 +118,7 @@
 	@auth
 
 		{{-- Logged in user --}}
-		<a href="{{ route('user', auth()->user()->id) }}">
+		<a href="{{ route('user', auth()->user()->name) }}">
 			@<strong>{{ auth()->user()->name }}</strong>
 		</a>
 
@@ -127,9 +127,14 @@
             <a href="{{ route('profile.edit') }}" class="profile-link">profile</a>
         @endif
 
-        {{-- Add post --}}
-        <a href="{{ route('posts.create') }}">
-			<strong>create post</strong>
+        {{-- Create post --}}
+        <a href="{{ route('posts.create') }}" class="post-create-btn">
+            <strong>create post</strong>
+		</a>
+
+        {{-- Create tag --}}
+        <a href="{{ route('tags.create') }}">
+			<strong>create tag</strong>
 		</a>
 
 		{{-- Logout link --}}

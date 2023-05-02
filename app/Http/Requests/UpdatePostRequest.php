@@ -25,7 +25,8 @@ class UpdatePostRequest extends FormRequest
     {
         return [
             'title' => ['required', 'unique:posts,title', 'max:200'],
-            'text' => ['required', 'unique:posts,text']
+            'text' => ['required'],
+            'tags' => ['array']
         ];
     }
 }

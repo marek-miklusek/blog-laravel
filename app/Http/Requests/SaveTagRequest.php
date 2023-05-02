@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SavePostRequest extends FormRequest
+class SaveTagRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,9 +22,7 @@ class SavePostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required', 'unique:posts,title', 'max:200'],
-            'text' => ['required'],
-            'tags' => ['array']
+            'tag' => ['required', 'max:60']
         ];
     }
 }

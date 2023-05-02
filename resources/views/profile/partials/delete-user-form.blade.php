@@ -2,7 +2,7 @@
 
 <form method="POST" action="{{ route('profile.destroy') }}">
     @csrf
-    @method('delete')
+    @method('DELETE')
 
     <button class="btn btn-outline-info">Delete</button>
 </form>

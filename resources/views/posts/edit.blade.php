@@ -22,8 +22,8 @@
             @error('text')
                 <p class="errors">{{ $message }}</p>
             @enderror
-        
-            <button type="submit" class="btn btn-primary comment-form-btn">Submit</button>
+
+            @include('tags.tags-form', ['type' => 'edit'])
 
         </form>
         

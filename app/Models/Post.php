@@ -10,7 +10,7 @@ class Post extends Model
 {
     use HasFactory;
 
-    // Get the route key for the model, default is (posts/id)
+    // Get the route key for this model, default is (posts/id)
     // change it to (posts/slug)
 	public function getRouteKeyName()
 	{
@@ -48,6 +48,13 @@ class Post extends Model
     {
         return $this->hasMany(Comment::class)->latest();
     }
+
+
+    // A post can have many tags
+	public function tags()
+	{
+		return $this->belongsToMany(Tag::class);
+	}
 
 
     /*
@@ -90,7 +97,7 @@ class Post extends Model
     |--------------------------------------------------------------------------
     */
 
-    // Add slug from title to DB
+    // Create slug from title before storing to DB
     public function setTitleAttribute($value)
     {   
         $this->attributes['title'] = $value;

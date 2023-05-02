@@ -53,25 +53,38 @@ a {
 }
 
 .post-edit-btn {
-   padding-left: .6em;
+   padding-left: .7em;
+}
+
+.post-create-btn {
+   color: black;
+   font-size: 1.1em;
+}
+
+.post-create-btn:hover {
+   color: #fff;
+}
+
+.post-delete-btn {
+   margin-left: 12px;
+   color: #888;
+}
+
+.post-delete-btn:hover {
+   color: #ff6f39;
+}
+
+.delete-post {
+   margin: 0 10px;
+   padding: 0 5px 2px 5px;
 }
 
 .form-heading {
    color: #ff6f39;
 }
 
-.comments-count {
-   padding-left: .5em;
-   color: #ff6f39;
-}
-
 .author {
    color: #ff6f39;
-}
-
-.comments-count:hover, 
-.author:hover {
-   color: #ff946c;
 }
 
 .main-heading {
@@ -189,6 +202,16 @@ a {
    margin: 1.2em 0;
 }
 
+.comments-count {
+   padding-left: .5em;
+   color: #ff6f39;
+}
+
+.comments-count:hover, 
+.author:hover {
+   color: #ff946c;
+}
+
 .comment-meta {
    display: flex;
    gap: .2em;
@@ -256,4 +279,28 @@ a {
 
 .textarea {
    width: 100%;
+}
+
+
+/* Tags */
+.article-tags {
+   margin: .5em 0 0;
+}
+
+.tags-input {
+   color: #ff7b4a;
+}
+
+.tags-create {
+   padding-top: .3em;
+}
+
+.tag-btn {
+   padding: 0 5px 5px 5px;
+}
+
+.tags-delete-btn {
+   position: relative;
+   left: 5px;
+   color: #FF0000;
 }

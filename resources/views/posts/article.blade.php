@@ -1,10 +1,8 @@
 <article class="post {{ $type }}">
 
-	<header>
-		<h2>
-			<a href="{{ route('posts.show', $post->slug) }}">{{ $post->title }}</a>
-		</h2>
-    </header>
+	<h2>
+		<a href="{{ route('posts.show', $post->slug) }}">{{ $post->title }}</a>
+	</h2>
 
 	@if ($type == 'full')
 		<p>{!! $post->format_text !!}</p>
@@ -14,7 +12,7 @@
 
 	<footer class="d-flex">
 
-		<a href="{{ route('user', $post->user->id) }}" class="author">
+		<a href="{{ route('user', $post->user->name) }}" class="author">
 			@<strong>{{ $post->user->name }}</strong>
 		</a>
 
@@ -25,18 +23,13 @@
 		<time datetime="{{ $post->datetime }}" class="post-created-at">{{ $post->created_at }}</time>
 
 		@can('update', $post)
-
 			<a href="{{ route('posts.edit', $post->slug) }}" class="post-edit-btn">edit</a>
-
-			<form action="{{ route('posts.destroy', $post->slug) }}" method="POST">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn comment-delete-btn">x</button>
-            </form>
-			
+			<a href="{{ route('posts.delete', $post->slug) }}" class="post-delete-btn">x</a>
 		@endcan
 
 	</footer>
+
+	@include('tags.show')
 
 </article>
 

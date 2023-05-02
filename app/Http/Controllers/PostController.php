@@ -17,7 +17,7 @@ class PostController extends Controller
         return view('posts.index', [
             // We can take all posts out from DB with other data(e.g.comments, user)
             // Eager loading for less sql query, which means it is faster
-            'posts' => Post::with('comments', 'user')->latest()->get() 
+            'posts' => Post::with('comments', 'user', 'tags')->latest()->get()
         ]);
     }
 
@@ -39,6 +39,10 @@ class PostController extends Controller
         $post = auth()->user()->posts()->create(
             $request->all()
         );
+
+        // Simultaneously adds and removes tags (sync)
+        // Attach tags to post
+		$post->tags()->sync($request->get('tags'));
 
         session()->flash('message', 'You created a new post');
         return redirect()->route('posts.show', $post->slug);
@@ -65,9 +69,9 @@ class PostController extends Controller
     public function edit(Post $post)
     {   
         $this->authorize('update', $post);
-        
+
         return view('posts.edit', [
-            'post' => $post
+            'post' => $post,
         ]);
     }
 
@@ -79,6 +83,10 @@ class PostController extends Controller
     {
         $post->update($request->all());
 
+        // Simultaneously adds and removes tags (sync)
+        // Attach tags to post
+		$post->tags()->sync($request->get('tags'));
+
         session()->flash('message', 'Your post was updated');
         return redirect('/posts/'.$post->slug);
     }
@@ -89,7 +97,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        // When this returns true, we can continue in code bellow(CommentPolicy)
+        // When this returns true, we can continue in code bellow (PostPolicy)
         $this->authorize('update', $post);
 
         $post->delete();
@@ -97,4 +105,25 @@ class PostController extends Controller
         session()->flash('message', 'Your post was deleted');
         return redirect('/');
     }
+
+
+    /**
+     * Show form for removing specified resource.
+     */
+    public function delete(Post $post)
+    {
+	    // When this returns true, we can continue in code bellow(CommentPolicy)
+        $this->authorize('update', $post);
+
+	    return view('posts.delete', [
+            'post' => $post
+        ]);
+    }
 }
+
+
+/*
+|--------------------------------------------------------------------------
+| All tags select in AppServiceProvider method boot()
+|--------------------------------------------------------------------------
+*/
