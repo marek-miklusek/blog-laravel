@@ -300,7 +300,7 @@ a {
    width: 5em;
    padding: 10px 0;
    display: block;
-   border-bottom: 1px #fff solid;
+   border-bottom: 1px #0dcaf0 solid;
  }
  
  .dropdown-content a:hover {

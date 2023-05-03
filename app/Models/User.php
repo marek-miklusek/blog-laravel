@@ -71,11 +71,4 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comment::class);
     }
-    
-    public function getNameAttribute($value)
-    {
-        $name = preg_replace('/[^a-z0-9-]/', '', $value); // Remove all non-alphanumeric characters except hyphens
-        $name = preg_replace('/([-]{2,})/', '-', $value); // Replace multiple consecutive hyphens with a single one
-        $name = preg_replace('/^-+|-+$/', '', $value); // Remove hyphens from the beginning and end of the string
-    }
 }

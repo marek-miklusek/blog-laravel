@@ -23,13 +23,6 @@ use App\Http\Controllers\ProfileController;
 Route::get('/', [PostController::class, 'index']);
 
 
-// Oauth, login by github or facebook using laravel/socialite package
-Route::get('/auth/{service}', [OauthController::class, 'redirect'])
-    ->where('service', '(github|facebook)');
-Route::get('/auth/{service}/callback', [OauthController::class, 'callback'])
-    ->where('service', '(github|facebook)');
-
-
 // The methods will be executed only when user is logged in('auth')
 Route::middleware('auth')->group(function () {
 
