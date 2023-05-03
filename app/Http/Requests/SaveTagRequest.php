@@ -14,6 +14,7 @@ class SaveTagRequest extends FormRequest
         return auth()->check();
     }
 
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -22,7 +23,16 @@ class SaveTagRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'tag' => ['required', 'max:60']
+            'tag' => ['required', 'max:60', 'regex:/^[a-zA-Z0-9]+([-][a-zA-Z0-9]+)*$/'],
+        ];
+    }
+
+
+    // Error message for tag.regex
+    public function messages()
+    {
+        return [
+            'tag.regex' => 'The tag may only contain letters, numbers, and hyphens.',
         ];
     }
 }

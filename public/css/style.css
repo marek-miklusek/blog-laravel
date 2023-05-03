@@ -100,13 +100,9 @@ a {
 
 
 /* User */
-.logout-btn {
-   color: black;
-   font-weight: bold;
-}
-
-.logout-btn:hover {
-   color: #fff;
+.username {
+   position: relative;
+   top: 5px;
 }
 
 .input {
@@ -133,8 +129,8 @@ a {
    border-radius: 10px;
 }
 
-.forgot-anchor {
-   padding-top: 1em;
+.forgot-password {
+   padding-top: .8em;
    margin-bottom: 0;
 }
 
@@ -166,11 +162,6 @@ a {
    background-color: #1a1a1a;
    padding: 1em;
    border-radius: 10px;
-}
-
-.profile-link {
-   color: black;
-   font-weight: bold;
 }
 
 .profile-link:hover {
@@ -295,3 +286,28 @@ a {
    left: 5px;
    color: #FF0000;
 }
+
+
+/* Dropdown */ 
+ .dropdown-content {
+   display: none;
+   position: absolute;
+   z-index: 1;
+ }
+ 
+ .dropdown-content a {
+   color: #fff;
+   width: 5em;
+   padding: 10px 0;
+   display: block;
+   border-bottom: 1px #fff solid;
+ }
+ 
+ .dropdown-content a:hover {
+   color: #0dcaf0;
+ }
+ 
+ .dropdown:hover .dropdown-content {
+   display: block;
+ }
+ 

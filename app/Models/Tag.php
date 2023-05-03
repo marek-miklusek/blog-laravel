@@ -42,30 +42,4 @@ class Tag extends Model
 	{
 		return $this->belongsToMany(Post::class)->latest();
 	}
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | Accessors
-    |--------------------------------------------------------------------------
-    */
-  
-    // Urldecode if tag has more than 1 word before displaying
-    public function getTagAttribute($value)
-    {
-        return urldecode($value);
-    }
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | Mutators
-    |--------------------------------------------------------------------------
-    */
-
-    // Urlencode if tag has more than 1 word, before storing in DB
-    public function setTagAttribute($value)
-    {   
-        $this->attributes['tag'] = urlencode($value);
-    }
 }

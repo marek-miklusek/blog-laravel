@@ -117,32 +117,34 @@
 
 	@auth
 
-		{{-- Logged in user --}}
-		<a href="{{ route('user', urlencode(auth()->user()->name)) }}">
+		<a href="{{ route('user', auth()->user()->name) }}" class="username">
 			@<strong>{{ auth()->user()->name }}</strong>
 		</a>
 
-        {{-- User's profile --}}
-        @if (Request::segment(1) == 'user')
-            <a href="{{ route('profile.edit') }}" class="profile-link">profile</a>
-        @endif
+        <div class="dropdown">
+            <button class="btn btn-outline-info">Menu</button>
+            
+            <div class="dropdown-content">
+                <a href="{{ route('profile.edit') }}">
+                    profile
+                </a>
 
-        {{-- Create post --}}
-        <a href="{{ route('posts.create') }}">
-            <strong>create post</strong>
-		</a>
+                <a href="{{ route('posts.create') }}">
+                    create post
+                </a>
 
-        {{-- Create tag --}}
-        <a href="{{ route('tags.create') }}">
-			<strong>create tag</strong>
-		</a>
+                <a href="{{ route('tags.create') }}">
+                    create tag
+                </a>
 
-		{{-- Logout link --}}
-		<a href="{{ route('logout') }}" class="logout-btn" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-			Log Out
-		</a>
+                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    log out
+                </a>
+            </div>
 
-		<form id="logout-form" method="POST" action="{{ route('logout') }}">
+        </div>
+          
+        <form id="logout-form" method="POST" action="{{ route('logout') }}">
 			@csrf
 		</form>
         

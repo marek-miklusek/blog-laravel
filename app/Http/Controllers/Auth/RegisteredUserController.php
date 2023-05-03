@@ -31,9 +31,11 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:255', 'regex:/^[a-zA-Z0-9]+([-][a-zA-Z0-9]+)*$/'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ], [
+            'name.regex' => 'The name may only contain letters, numbers, and hyphens.'
         ]);
 
         $user = User::create([
@@ -47,7 +49,6 @@ class RegisteredUserController extends Controller
         Auth::login($user);
 
         session()->flash('message', 'Welcome, '.auth()->user()->name.' you was successfully registered!');
-
         return redirect(RouteServiceProvider::HOME);
     }
 }

@@ -5,6 +5,7 @@ use App\Http\Controllers\TagController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\OauthController;
 use App\Http\Controllers\ProfileController;
 
 /*
@@ -20,6 +21,13 @@ use App\Http\Controllers\ProfileController;
 
 // Homepage
 Route::get('/', [PostController::class, 'index']);
+
+
+// Oauth, login by github or facebook using laravel/socialite package
+Route::get('/auth/{service}', [OauthController::class, 'redirect'])
+    ->where('service', '(github|facebook)');
+Route::get('/auth/{service}/callback', [OauthController::class, 'callback'])
+    ->where('service', '(github|facebook)');
 
 
 // The methods will be executed only when user is logged in('auth')

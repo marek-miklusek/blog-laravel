@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -19,7 +20,7 @@ class PostFactory extends Factory
     {
         $title = fake()->words(4, true);
         return [
-            'user_id' => 1,
+            'user_id' => User::inRandomOrder()->first()->id,
             'title' => ucfirst($title),
             'slug' => Str::slug($title),
             'text' => fake()->paragraphs(5, true)

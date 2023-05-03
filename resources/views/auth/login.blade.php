@@ -27,18 +27,20 @@
 
         
         <div>
-
             <input type="checkbox" name="remember">
             <span>Remember me</span>
-         
             <button class="btn login-btn">
                 Log in
             </button>
-
         </div>
 
+        <p class="pt-3 mb-0">
+            by <a href="/auth/github">Github</a>
+            by <a href="/auth/facebook">Facebook</a>
+        </p>
+
         @if (Route::has('password.request'))
-            <p class="forgot-anchor">
+            <p class="forgot-password">
                 <a href="{{ route('password.request') }}">
                     Forgot your password?
                 </a>
