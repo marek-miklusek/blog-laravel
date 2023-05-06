@@ -7,7 +7,7 @@
     
     <div class="post-edit-form">
      
-        <form action="{{ route('posts.update', $post->slug) }}" method="POST">
+        <form action="{{ route('posts.update', $post->slug) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PATCH')
 
@@ -20,6 +20,14 @@
 
             <textarea class="form-control" name="text" rows="12" cols="70" placeholder="text">{{ $post->text }}</textarea>
             @error('text')
+                <p class="errors">{{ $message }}</p>
+            @enderror
+
+            <div class="my-2">
+                <label for="file">Choose a file to upload:</label>
+                <input type="file" name="items[]">
+            </div>
+            @error('items.0')
                 <p class="errors">{{ $message }}</p>
             @enderror
 

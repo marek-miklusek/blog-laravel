@@ -13,6 +13,11 @@ class PostPolicy
      */
     public function update(User $user, Post $post): bool
     {
-        return $post->user_id === $user->id;
+        if ($user->hasRole('admin')) {
+            return true;
+        }
+        else {
+            return $post->user_id === $user->id;
+        }
     }
 }

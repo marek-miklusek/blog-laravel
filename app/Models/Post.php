@@ -32,7 +32,7 @@ class Post extends Model
 
     /*
     |--------------------------------------------------------------------------
-    | Relationships between models (tables in DB)
+    | Relationships between models(tables in DB)
     |--------------------------------------------------------------------------
     */
 

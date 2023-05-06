@@ -7,7 +7,7 @@
     
     <div class="post-edit-form">
      
-        <form action="{{ route('posts.store') }}" method="POST">
+        <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
             <h5 class="form-heading">Create post</h5>
@@ -19,6 +19,14 @@
 
             <textarea name="text" rows="12" cols="70" class="form-control" placeholder="text">{{ old('text') }}</textarea>
             @error('text')
+                <p class="errors">{{ $message }}</p>
+            @enderror
+
+            <div class="my-2">
+                <label for="file">Choose a file to upload:</label>
+                <input type="file" name="items[]">
+            </div>
+            @error('items.0')
                 <p class="errors">{{ $message }}</p>
             @enderror
 

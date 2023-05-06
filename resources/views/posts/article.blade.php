@@ -11,7 +11,7 @@
 	@endif
 
 	<footer class="d-flex">
-		
+
 		<a href="{{ route('user', $post->user->name) }}" class="author">
 			@<strong>{{ $post->user->name }}</strong>
 		</a>

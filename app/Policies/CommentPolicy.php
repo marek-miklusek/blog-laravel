@@ -13,7 +13,11 @@ class CommentPolicy
      */
     public function update(User $user, Comment $comment): bool
     {
-        return $comment->user_id === $user->id;
+        if ($user->hasRole('admin')) {
+            return true;
+        }
+        else {
+            return $comment->user_id === $user->id;
+        }
     }
-    
 }

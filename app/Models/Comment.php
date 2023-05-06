@@ -23,7 +23,7 @@ class Comment extends Model
 
     /*
     |--------------------------------------------------------------------------
-    | Relationships between models (tables in DB)
+    | Relationships between models(tables in DB)
     |--------------------------------------------------------------------------
     */
     

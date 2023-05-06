@@ -270,7 +270,7 @@ a {
 }
 
 .tags-input {
-   color: #ff7b4a;
+   color: #ccc;
 }
 
 .tags-create {
@@ -278,13 +278,20 @@ a {
 }
 
 .tag-btn {
-   padding: 0 5px 5px 5px;
+   padding: 0 5px 4px 5px;
 }
 
 .tags-delete-btn {
    position: relative;
    left: 5px;
    color: #FF0000;
+}
+
+.add-tags {
+   padding-top: .7em;
+   color: black;
+   text-decoration: underline 1px dashed black;
+   margin-bottom: 0;
 }
 
 

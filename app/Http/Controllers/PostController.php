@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\File;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use App\Http\Requests\SavePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 
@@ -14,10 +16,16 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('posts.index', [
+        // We will save all posts to cache, then the query does not have to be 
+        // run again and again and all posts are only pulled from the cache
+        $posts = Cache::rememberForever('posts', function() {
             // We can take all posts out from DB with other data(e.g.comments, user)
             // Eager loading for less sql query, which means it is faster
-            'posts' => Post::with('comments', 'user', 'tags')->latest()->get()
+            return Post::with('comments', 'user', 'tags')->latest()->get();
+        });
+
+        return view('posts.index', [
+            'posts' => $posts
         ]);
     }
 
@@ -27,6 +35,7 @@ class PostController extends Controller
      */
     public function create()
     {
+        // All tags for create and edit select in AppServiceProvider method boot()
         return view('posts.create');
     }
 
@@ -40,8 +49,8 @@ class PostController extends Controller
             $request->all()
         );
 
-        // Simultaneously adds and removes tags (sync)
-        // Attach tags to post
+        // Simultaneously adds and removes tags(sync)
+        // as well attach tags to post
 		$post->tags()->sync($request->get('tags'));
 
         session()->flash('message', 'You created a new post');
@@ -83,9 +92,12 @@ class PostController extends Controller
     {
         $post->update($request->all());
 
-        // Simultaneously adds and removes tags (sync)
-        // Attach tags to post
+        // Simultaneously adds and removes tags(sync)
+        // as well attach tags to post
 		$post->tags()->sync($request->get('tags'));
+
+        // Upload files
+	    $this->uploadFiles($post, $request->file('items'));
 
         session()->flash('message', 'Your post was updated');
         return redirect('/posts/'.$post->slug);
@@ -97,7 +109,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        // When this returns true, we can continue in code bellow (PostPolicy)
+        // When this returns true, we can continue in code bellow(PostPolicy)
         $this->authorize('update', $post);
 
         $post->delete();
@@ -119,10 +131,22 @@ class PostController extends Controller
             'post' => $post
         ]);
     }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Private functions
+    |--------------------------------------------------------------------------
+    */
+    private function uploadFiles($post, $files)
+	{
+		if ($files) {
+            foreach ($files as $file) {
+                if ( ! $file || ! $file->isValid() ) continue;
+                File::saveFile($post, $file);
+            }
+        }
+	}
 }
 
-/*
-|--------------------------------------------------------------------------
-| All tags for edit and create select in AppServiceProvider method boot()
-|--------------------------------------------------------------------------
-*/
+

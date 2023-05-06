@@ -12,7 +12,7 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    // Get the route key for this model, default is (user/id)
+    // Get the route key for this model, default is(user/id)
     // change it to (user/name)
 	public function getRouteKeyName()
 	{
@@ -55,7 +55,7 @@ class User extends Authenticatable
 
     /*
     |--------------------------------------------------------------------------
-    | Relationships between models (tables in DB)
+    | Relationships between models(tables in DB)
     |--------------------------------------------------------------------------
     */
 
@@ -70,5 +70,19 @@ class User extends Authenticatable
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+
+    // Get the role of this author
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+
+    // Check which role has user, return bool
+    public function hasRole($role): bool
+    {
+        return $this->role->name === $role;
     }
 }

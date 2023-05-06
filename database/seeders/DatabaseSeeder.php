@@ -16,20 +16,21 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // $this->call(UsersTableSeeder::class);
-
         // User::factory(10)->create();
         // Post::factory(10)->create();
         // Comment::factory(10)->create();
 
-        // Create 5 users, each has 5 posts and 5 comments, plus 25 tags
-        User::factory(5)->create()->each(function($user) {
+        $this->call(RolesTableSeeder::class);
+
+        // Create 5 users, 25 posts, 25 comments and 5 tags
+        User::factory(5)->create()->each(function() {
+            $tags = Tag::factory()->create();
+
             for ($i=0; $i < 5; $i++) { 
                 $post = Post::factory()->create();
                 Comment::factory()->create();
 
-                // Create 25 random tags and attach them to the post
-                $tags = Tag::factory()->create();
+                // Attached random tags to the post
                 $post->tags()->attach($tags->pluck('id')->random());
             }});
     }
