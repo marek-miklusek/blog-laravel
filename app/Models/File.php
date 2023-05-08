@@ -9,7 +9,31 @@ class File extends Model
 {
     use HasFactory;
 
+    // The attributes that are not mass assignable
     protected $guarded = ['id'];
+
+	
+	// Icons for files
+	public function imgFile($file)
+	{
+		switch ($file->ext) {
+			case 'pdf':
+				return asset('images/pdf-file.png');
+				break;
+			case 'txt':
+				return asset('images/txt-file.png');
+				break;
+			case 'doc':
+				return asset('images/doc-file.png');
+				break;
+			case 'csv':
+				return asset('images/csv-file.png');
+				break;
+			default:
+				# code...
+				break;
+		}
+	}
 
 
     /*
@@ -27,9 +51,10 @@ class File extends Model
 
     /*
     |--------------------------------------------------------------------------
-    | Public static function
+    | Public static functions
     |--------------------------------------------------------------------------
     */
+
 	public static function saveFile($post, $file)
 	{
         // Create new file

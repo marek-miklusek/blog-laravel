@@ -7,7 +7,8 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use App\Http\Requests\SavePostRequest;
-use App\Http\Requests\UpdatePostRequest;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File as LaravelFile;
 
 class PostController extends Controller
 {
@@ -53,6 +54,9 @@ class PostController extends Controller
         // as well attach tags to post
 		$post->tags()->sync($request->get('tags'));
 
+        // Upload files
+	    $this->uploadFiles($post, $request->file('items'));
+
         session()->flash('message', 'You created a new post');
         return redirect()->route('posts.show', $post->slug);
     }
@@ -88,8 +92,11 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePostRequest $request, Post $post)
+    public function update(SavePostRequest $request, Post $post)
     {
+        // When this returns true, we can continue in code bellow(PostPolicy)
+        $this->authorize('update', $post);
+
         $post->update($request->all());
 
         // Simultaneously adds and removes tags(sync)
@@ -113,6 +120,9 @@ class PostController extends Controller
         $this->authorize('update', $post);
 
         $post->delete();
+
+        // Remove files
+        LaravelFile::deleteDirectory(storage_path('posts/'.$post->id));
 
         session()->flash('message', 'Your post was deleted');
         return redirect('/');
@@ -138,6 +148,7 @@ class PostController extends Controller
     | Private functions
     |--------------------------------------------------------------------------
     */
+
     private function uploadFiles($post, $files)
 	{
 		if ($files) {

@@ -317,4 +317,48 @@ a {
  .dropdown:hover .dropdown-content {
    display: block;
  }
+
+
+ /* Files */
+ .edit-files {
+   background-color: #888;
+   margin: .5em 0 0;
+   padding: .375em .75em;
+   border-radius: .375em;
+}
+
+.upload-files {
+   position: relative;
+   background-color: #fff;
+   color: #0d6efd;
+   padding: .200em .75em;
+   border-radius: .375em;
+   margin: .5em 0;
+}
+
+.upload-files a {
+   position: absolute;
+   bottom: -30px;
+   right: 0;
+}
+
+.input-files {
+   margin-bottom: 0;
+}
+
+.delete-file {
+   font-size: 1em;
+   color: black;
+}
+
+.delete-file:hover {
+   color: #FF0000;
+}
+
+.img-file {
+   max-width: 1em;
+   position: relative;
+   bottom: 2px;
+   right: 2px;
+}
  

@@ -45,7 +45,6 @@ class ProfileController extends Controller
         $request->user()->delete();
 
         session()->flash('message', 'Bye, bye :(');
-
         return redirect('/');
     }
 }

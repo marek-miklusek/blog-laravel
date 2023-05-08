@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\FileController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CommentController;
@@ -41,6 +42,10 @@ Route::middleware('auth')->group(function () {
 
     // Users
     Route::get('user/{name}', [UserController::class, 'index'])->name('user');
+
+    // Files
+    Route::get('download/{id}/{name}', [FileController::class, 'download']);
+    Route::get('delete/{id}/', [FileController::class, 'destroy']);
 
     // Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

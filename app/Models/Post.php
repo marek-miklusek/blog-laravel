@@ -50,10 +50,17 @@ class Post extends Model
     }
 
 
-    // A post can have many tags
+    // Post can have many tags
 	public function tags()
 	{
 		return $this->belongsToMany(Tag::class);
+	}
+
+
+    // Post can have many files
+	public function files()
+	{
+		return $this->hasMany(File::class);
 	}
 
 

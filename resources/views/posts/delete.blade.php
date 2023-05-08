@@ -28,13 +28,11 @@
             <time datetime="{{ $post->datetime }}" class="post-created-at">{{ $post->created_at }}</time>
 
             @can('update', $post)
-
                 <form action="{{ route('posts.destroy', $post->slug) }}" method="POST">
                     @csrf
                     @method('DELETE')
                     <button class="btn btn-outline-danger delete-post">Delete post</button>
                 </form>
-                
             @endcan
 
             <span class="or">
@@ -43,6 +41,8 @@
 
         </footer>
 
+        @include('partials.files')
+        
         @include('tags.show')
 
     </article>

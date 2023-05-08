@@ -7,7 +7,7 @@
     
     <div class="post-edit-form">
      
-        <form action="{{ route('posts.update', $post->slug) }}" method="POST" enctype="multipart/form-data">
+        <form id="edit-form" action="{{ route('posts.update', $post->slug) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PATCH')
 
@@ -23,14 +23,21 @@
                 <p class="errors">{{ $message }}</p>
             @enderror
 
-            <div class="my-2">
-                <label for="file">Choose a file to upload:</label>
-                <input type="file" name="items[]">
-            </div>
-            @error('items.0')
-                <p class="errors">{{ $message }}</p>
-            @enderror
+            @if($post->files)
+                <ul class="mb-0">
+                    @foreach($post->files as $file)
+                        <li class="edit-files">
+                            <img src="{{ $file->imgFile($file) }}" alt="" class="img-file">
+                            {{ $file->name }}
+                            <a href="{{ url('delete', ["$file->id","$file->name"]) }}" class="delete-file float-end">
+                                x
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
+            @endif
 
+            @include('partials.upload-files')
             @include('tags.tags-form', ['type' => 'edit'])
 
         </form>

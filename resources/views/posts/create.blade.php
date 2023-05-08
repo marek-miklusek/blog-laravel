@@ -7,7 +7,7 @@
     
     <div class="post-edit-form">
      
-        <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
+        <form id="add-form" action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
             <h5 class="form-heading">Create post</h5>
@@ -22,14 +22,7 @@
                 <p class="errors">{{ $message }}</p>
             @enderror
 
-            <div class="my-2">
-                <label for="file">Choose a file to upload:</label>
-                <input type="file" name="items[]">
-            </div>
-            @error('items.0')
-                <p class="errors">{{ $message }}</p>
-            @enderror
-
+            @include('partials.upload-files')
             @include('tags.tags-form', ['type' => 'create'])
 
         </form>
