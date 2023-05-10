@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class File extends Model
 {
@@ -18,19 +19,19 @@ class File extends Model
 	{
 		switch ($file->ext) {
 			case 'pdf':
-				return asset('images/pdf-file.png');
+				return asset('files-icons/pdf-file.png');
 				break;
 			case 'txt':
-				return asset('images/txt-file.png');
+				return asset('files-icons/txt-file.png');
 				break;
 			case 'doc':
-				return asset('images/doc-file.png');
+				return asset('files-icons/doc-file.png');
 				break;
 			case 'csv':
-				return asset('images/csv-file.png');
+				return asset('files-icons/csv-file.png');
 				break;
 			default:
-				# code...
+				return asset('files-icons/img.png');
 				break;
 		}
 	}
@@ -38,42 +39,13 @@ class File extends Model
 
     /*
     |--------------------------------------------------------------------------
-    | Relationships between models(tables in DB)
+    | Polymorphic Relationships between models(tables in DB)
     |--------------------------------------------------------------------------
     */
 
-    // Get post for this file
-	public function post()
-	{
-		return $this->belongsTo(Post::class);
-	}
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | Public static functions
-    |--------------------------------------------------------------------------
-    */
-
-	public static function saveFile($post, $file)
-	{
-        // Create new file
-        $filesize = $file->getSize();
-		$filepath = storage_path('posts/' . $post->id);
-		$extension = $file->getClientOriginalExtension();
-		$filename = str_replace(".$extension", "-". rand(11111, 99999) . ".$extension", $file->getClientOriginalName());
-
-		// Save the file
-		$file->move($filepath, $filename);
-
-		// Store the file in Database
-		return File::create([
-			'post_id' => $post->id,
-			'name' => $file->getClientOriginalName(),
-			'filename' => $filename,
-			'mime' => $file->getClientMimeType(),
-			'ext' => $extension,
-			'size' => $filesize,
-		]);
-	}
+	// Uploaded file can belong user, post or anything
+    public function fileable(): MorphTo
+    {
+        return $this->morphTo();
+    }
 }

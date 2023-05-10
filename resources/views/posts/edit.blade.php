@@ -29,7 +29,7 @@
                         <li class="edit-files">
                             <img src="{{ $file->imgFile($file) }}" alt="" class="img-file">
                             {{ $file->name }}
-                            <a href="{{ url('delete', ["$file->id","$file->name"]) }}" class="delete-file float-end">
+                            <a href="{{ url('delete', $file->id) }}" class="delete-file float-end">
                                 x
                             </a>
                         </li>
@@ -37,7 +37,15 @@
                 </ul>
             @endif
 
+            @include('partials.add-image')
             @include('partials.upload-files')
+
+            <button class="btn btn-success">Submit</button>
+
+            <span class="or">
+                or <a href="{{ route('posts.show', $post->slug) }}">cancel</a>
+            </span>
+            
             @include('tags.tags-form', ['type' => 'edit'])
 
         </form>

@@ -26,6 +26,7 @@ class SavePostRequest extends FormRequest
             'title' => ['required', 'unique:posts,title', 'max:200'],
             'text' => ['required'],
             'tags' => ['array'],
+            'image' => ['image']
         ];
 
         // How to validate an array('items'), creating

@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -53,6 +54,13 @@ class User extends Authenticatable
     ];
 
 
+    // Check which role has user, return bool
+    public function hasRole($role): bool
+    {
+        return $this->role->name === $role;
+    }
+
+
     /*
     |--------------------------------------------------------------------------
     | Relationships between models(tables in DB)
@@ -80,9 +88,51 @@ class User extends Authenticatable
     }
 
 
-    // Check which role has user, return bool
-    public function hasRole($role): bool
+    // Polymorphic Relationships
+    // User can have one uploaded file
+    public function file(): MorphOne
     {
-        return $this->role->name === $role;
+        return $this->morphOne(File::class, 'fileable')->latest();
     }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Accessors
+    |--------------------------------------------------------------------------
+    */
+
+    // Url link to avatar image
+    public function getAvatarAttribute()
+	{
+		if ( ! $this->file ) return false;
+
+		return [
+			'full'  => $this->avatarSize(),
+			'thumb' => $this->avatarSize('thumb'),
+			'tiny'  => $this->avatarSize('tiny'),
+		];
+	}
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Private functions
+    |--------------------------------------------------------------------------
+    */
+
+    // Get size of avatar image for getAvatarAttribute()
+	private function avatarSize($size = null)
+	{
+		$file = $this->file;
+     
+        $path = asset('profile-image/users/'.$file->fileable_id);
+		$filename = $file->filename;
+
+		if ($size) {
+			$filename = basename($file->name, '.'.$file->ext) . '-' . $size . '.' . $file->ext;
+		}
+
+		return asset($path.'/'.$filename);
+	}
 }

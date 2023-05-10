@@ -4,6 +4,10 @@
 		<a href="{{ route('posts.show', $post->slug) }}">{{ $post->title }}</a>
 	</h2>
 
+	@if ($post->image && $type == 'full')
+		<img src="{{ $post->image }}" alt="{{ $post->title }}" class="avatar">
+	@endif
+
 	@if ($type == 'full')
 		<p>{!! $post->format_text !!}</p>
 	@else
@@ -28,7 +32,7 @@
 		@endcan
 
 	</footer>
-
+	
 	@include('partials.files')
 	@include('tags.show')
 

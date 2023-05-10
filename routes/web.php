@@ -45,12 +45,13 @@ Route::middleware('auth')->group(function () {
 
     // Files
     Route::get('download/{id}/{name}', [FileController::class, 'download']);
-    Route::get('delete/{id}/', [FileController::class, 'destroy']);
+    Route::get('delete/{id}', [FileController::class, 'destroy']);
 
     // Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/profile/{id}', [ProfileController::class, 'delete'])->name('profile.delete');
     
 });
 

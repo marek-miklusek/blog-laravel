@@ -22,7 +22,15 @@
                 <p class="errors">{{ $message }}</p>
             @enderror
 
+            @include('partials.add-image')
             @include('partials.upload-files')
+
+            <button class="btn btn-success">Submit</button>
+
+            <span class="or">
+                or <a href="{{ url()->previous() }}">cancel</a>
+            </span>
+
             @include('tags.tags-form', ['type' => 'create'])
 
         </form>

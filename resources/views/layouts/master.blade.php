@@ -13,15 +13,15 @@
 
         @include('partials.navigation')
 
-        @if(session('message'))
-            <p class="alert alert-success flash-message">{{ session('message') }}</p>
-        @endif
-
         <header>
             <h1 class="main-heading">
                 <a href="/" class="main-logo">(｡◕‿◕｡)</a>
             </h1>
         </header>
+
+        @if(session('message'))
+            <p class="alert alert-success flash-message">{{ session('message') }}</p>
+        @endif
 
         <main class="container main-box">
             @yield('content')

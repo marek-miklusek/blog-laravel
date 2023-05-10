@@ -16,12 +16,12 @@ a {
 
 /* Navigation */
 .nav-links {
-   padding: 1em 2em 0;
+   padding: .5em 2em 0;
 }
 
 .flash-message {
    max-width: 30em;
-   margin: 0 auto 2em auto;
+   margin: 0 auto .5em auto;
 }
 
 .alert-success {
@@ -37,7 +37,7 @@ a {
 .main-box {
    max-width: 700px;
    margin: 0 auto;
-   padding-bottom: 1em;
+   padding-bottom: 2em;
 }
 
 .post-edit-form {
@@ -86,7 +86,7 @@ a {
 
 .main-logo {
    position: relative;
-   bottom: 29px;
+   bottom: 40px;
 }
 
 .full {
@@ -96,6 +96,12 @@ a {
 .post-created-at {
    padding-left: .8em;
    color: #888;
+}
+
+.add-img-heading {
+   text-align: center;
+   color: #0dcaf0;
+   margin-bottom: .5em;
 }
 
 
@@ -361,4 +367,16 @@ a {
    bottom: 2px;
    right: 2px;
 }
+
+.add-avatar {
+   color: #198754;
+   text-align: center;
+   margin-top: 1em;
+}
+
+.user-avatar {
+   border-radius: 50%;
+}
+
+
  

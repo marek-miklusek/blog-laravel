@@ -1,9 +1,3 @@
-<button class="btn btn-primary">Submit</button>
-
-<span class="or">
-    or <a href="{{ url()->previous() }}">cancel</a>
-</span>
-
 <h5 class="add-tags">Add tags:</h5>
 
 <div class="tags-create">

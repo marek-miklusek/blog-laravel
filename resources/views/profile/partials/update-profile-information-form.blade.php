@@ -6,6 +6,6 @@
 
     <input name="name" type="text" value="{{ $user->name }}" required autofocus autocomplete="name"/>
     <input name="email" type="email" value="{{ $user->email }}" required autocomplete="username" />
-    <p class="mb-0"><button class="btn btn-outline-info mt-2">Save</button></p>
+    <p class="mb-0"><button class="btn btn-outline-success mt-2">Save</button></p>
 
 </form>

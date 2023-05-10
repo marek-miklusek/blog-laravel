@@ -2,16 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\File;
 use App\Models\Post;
+use App\Traits\UploadImage;
 use Illuminate\Http\Request;
+use App\Services\ImageService;
+use App\Services\UploadService;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Cache;
 use App\Http\Requests\SavePostRequest;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\File as LaravelFile;
 
 class PostController extends Controller
 {
+    use UploadImage;
+
+    protected $upload;
+    protected $image;
+
+    public function __construct(UploadService $upload, ImageService $image)
+    {
+        $this->upload = $upload;
+        $this->image = $image;
+    }
+
+
     /**
      * Display a listing of the resource.
      */
@@ -56,6 +69,10 @@ class PostController extends Controller
 
         // Upload files
 	    $this->uploadFiles($post, $request->file('items'));
+
+        // Upload Image
+	    $this->uploadImage($post, $request->file('image'), true);
+
 
         session()->flash('message', 'You created a new post');
         return redirect()->route('posts.show', $post->slug);
@@ -106,6 +123,9 @@ class PostController extends Controller
         // Upload files
 	    $this->uploadFiles($post, $request->file('items'));
 
+        // Upload Image
+	    $this->uploadImage($post, $request->file('image'), true);
+
         session()->flash('message', 'Your post was updated');
         return redirect('/posts/'.$post->slug);
     }
@@ -119,10 +139,14 @@ class PostController extends Controller
         // When this returns true, we can continue in code bellow(PostPolicy)
         $this->authorize('update', $post);
 
+        $post->files()->delete();
         $post->delete();
 
-        // Remove files
-        LaravelFile::deleteDirectory(storage_path('posts/'.$post->id));
+        // Remove files from storage folder
+        File::deleteDirectory(storage_path('posts/'.$post->id));
+
+        // Remove image from public folder
+        File::deleteDirectory(public_path('post-image/posts/'.$post->id));
 
         session()->flash('message', 'Your post was deleted');
         return redirect('/');
@@ -154,7 +178,7 @@ class PostController extends Controller
 		if ($files) {
             foreach ($files as $file) {
                 if ( ! $file || ! $file->isValid() ) continue;
-                File::saveFile($post, $file);
+                $this->upload->saveFile($post, $file);
             }
         }
 	}

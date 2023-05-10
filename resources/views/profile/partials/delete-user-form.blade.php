@@ -4,7 +4,7 @@
     @csrf
     @method('DELETE')
 
-    <button class="btn btn-outline-info">Delete</button>
+    <button class="btn btn-outline-danger">Delete</button>
 </form>
 
 
