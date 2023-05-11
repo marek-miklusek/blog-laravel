@@ -12,13 +12,13 @@
             @if($user->avatar)
                 <img src="{{ $user->avatar['thumb'] }}" alt="{{ $user->name }}" class="avatar">
             @else
-                <p class="add-avatar">Add your avatar</p>
+                <p class="add-avatar">Add your image</p>
             @endif
 
             <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PATCH')
-                <div class="d-flex">
+                <div class="d-flex justify-content-between">
                     <input type="file" name="avatar">
                     <button type="submit" class="btn btn-primary btn-sm">Upload</button>
                 </div>
@@ -28,7 +28,7 @@
                 <p class="errors">{{ $message }}</p>
             @enderror
 
-            <a href="{{ route('profile.delete', $user->id) }}">delete avatar</a>
+            <a href="{{ route('profile.delete', $user->id) }}">delete image</a>
             
         </div>
 
@@ -40,7 +40,7 @@
             <section class="pt-3">
                 @include('profile.partials.update-password-form')
             </section>
-
+            
             <section class="pt-3">
                 @include('profile.partials.delete-user-form')
             </section>

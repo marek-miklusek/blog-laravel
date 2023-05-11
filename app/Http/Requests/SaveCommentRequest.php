@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
 class SaveCommentRequest extends FormRequest
@@ -15,6 +14,7 @@ class SaveCommentRequest extends FormRequest
         return auth()->check();
     }
 
+    
     /**
      * Get the validation rules that apply to the request.
      *
@@ -24,7 +24,6 @@ class SaveCommentRequest extends FormRequest
     {
         return [
             'text' => ['required'],
-            'post_id' => ['required', 'integer', 'exists:posts,id']
         ];
     }
 }

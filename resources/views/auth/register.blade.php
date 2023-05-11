@@ -8,7 +8,7 @@
 	<form method="POST" action="{{ route('register') }}" class="text-center login-form">
         @csrf
 
-	    <h2 class="text-center">Register</h2>
+        <h2 class="text-center">Register</h2>
 
         <p>
             <input class="input" name="name" placeholder="name" value="{{ old('name') }}">
@@ -17,14 +17,12 @@
             <p class="errors">{{ $message }}</p>
         @enderror
 
-
         <p>
             <input class="input" name="email" type="email" placeholder="email" value="{{ old('email') }}">
         </p>
         @error('email')
             <p class="errors">{{ $message }}</p>
         @enderror
-
 
         <p>
             <input class="input" name="password" type="password" placeholder="password">
@@ -33,7 +31,6 @@
             <p class="errors">{{ $message }}</p>
         @enderror
 
-        
         <div>
             <input class="input" name="password_confirmation" type="password" placeholder="password again"/>
         </div>
@@ -47,7 +44,7 @@
         <button class="btn btn-info">
             Register
         </button>
-
+        
     </form>
 
 @endsection

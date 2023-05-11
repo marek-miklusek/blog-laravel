@@ -3,7 +3,7 @@
 namespace App\Traits;
 
 /**
- * Upload image
+ * Handles uploading and resizing of images for the given model
  */
 trait UploadImage
 {

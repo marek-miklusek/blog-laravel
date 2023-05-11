@@ -36,9 +36,9 @@ class ImageService
 		$img = Image::make($filepath);
 
         // Create thumb image
-        $img->resize(325, null, function ($constraint){       
+        $img->resize(375, null, function ($constraint){       
             $constraint->aspectRatio();})
-            ->crop(325, 416, 0, 0)
+            ->crop(375, 416, 0, 0)
             ->save($path . $filename . '-thumb.' . $file->ext);
 
         // Big image again

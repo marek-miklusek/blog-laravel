@@ -1,10 +1,12 @@
 <article class="comment">
 
-    <div>
-        {{ $comment->text }}
-    </div>
+    <div>{{ $comment->text }}</div>
 
     <footer class="comment-meta">
+
+        @if(auth()->user()->avatar)
+            <img src="{{ auth()->user()->avatar['tiny'] }}" class="user-avatar" alt="{{ auth()->user()->name }}">
+        @endif
 
         <a href="{{ route('user', $comment->user->id) }}" class="author">
             @<strong>{{ $comment->user->name }}</strong>
@@ -15,17 +17,14 @@
         </time>
 
         @can('update', $comment)
-
             <a href="{{ route('comments.edit', $comment->id) }}" class="comment-edit-btn">edit</a>
-
             <form action="{{ route('comments.destroy', $comment->id) }}" method="POST">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn comment-delete-btn">x</button>
             </form>
-
         @endcan
-           
+        
     </footer>
 
 </article>

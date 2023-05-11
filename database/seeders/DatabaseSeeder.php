@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
 
                 // Attached random tags to the post
                 $post->tags()->attach($tags->pluck('id')->random());
-            }});
+            }
+        });
     }
 }

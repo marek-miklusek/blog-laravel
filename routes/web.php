@@ -22,7 +22,6 @@ use App\Http\Controllers\ProfileController;
 // Homepage
 Route::get('/', [PostController::class, 'index']);
 
-
 // The methods will be executed only when user is logged in('auth')
 Route::middleware('auth')->group(function () {
 
@@ -56,7 +55,6 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
-
 
 /*
 |--------------------------------------------------------------------------

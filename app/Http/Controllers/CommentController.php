@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use App\Http\Requests\SaveCommentRequest;
 use App\Http\Requests\UpdateCommentRequest;
 
@@ -14,9 +15,16 @@ class CommentController extends Controller
      */
     public function store(SaveCommentRequest $request)
     {
-        $comment = auth()->user()->comments()->create(
-            $request->all()
-        );
+        // Retrieve the post_id from the session
+        $post_id = Session::get('post_id');
+
+        $comment = $request->user()->comments()->create([
+            'text' => $request->input('text'),
+            'post_id' => $post_id,
+        ]);
+
+        // Remove the post_id from the session
+        Session::forget('post_id');
 
         session()->flash('message_c', 'Your smart comment was added:)');
         return redirect('/posts/' . $comment->post->slug . '#comments');
@@ -35,6 +43,7 @@ class CommentController extends Controller
         ]);
     }
 
+
     /**
      * Update the specified resource in storage.
      */
@@ -46,6 +55,7 @@ class CommentController extends Controller
         return redirect('/posts/'.$comment->post->slug.'#comments');
     }
 
+    
     /**
      * Remove the specified resource from storage.
      */

@@ -7,7 +7,6 @@
 	<h4 class="comments-heading">Comments:</h4>
 
 	<ol class="comment-list">
-
 		@forelse ($post->comments as $comment)
 			<li>
 				@include('comments.show')
@@ -15,7 +14,6 @@
 		@empty
 			<p class="no-comments">No comments so far, be first :)</p>
 		@endforelse 
-
 	</ol>
 
 </section>

@@ -26,6 +26,13 @@ class AppServiceProvider extends ServiceProvider
         // Required my own functions
         require_once app_path('Helpers/functions.php');
 
+
+        /*
+        |--------------------------------------------------------------------------
+        | view()->composer(), dynamically compose view data for specified view
+        |--------------------------------------------------------------------------
+        */
+        
         // Select all tags at once for edit and create method in PostController
         // and include into view('partials.tags-form')
 	    view()->composer('tags.tags-form', function($view)

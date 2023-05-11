@@ -26,7 +26,6 @@
     <h5 class="container">or delete tag:</h5>
 
     <div class="container d-flex flex-wrap gap-2">
-
         @foreach ($tags as $tag)
             <form action="{{ route('tags.destroy', $tag->tag) }}" method="Post">
                 @csrf
@@ -34,7 +33,6 @@
                 <button class="btn btn-dark">{{ $tag->tag }}<span class="tags-delete-btn">&times;</span></button>
             </form>
         @endforeach 
-
     </div>
 
 @endsection

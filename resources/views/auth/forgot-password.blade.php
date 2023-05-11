@@ -24,7 +24,7 @@
             <button name="submit" class="btn forgot-password-btn">
                 Email Password Reset Link
             </button>
-        
+            
         </form>
 
     </div>

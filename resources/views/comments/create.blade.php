@@ -1,8 +1,8 @@
-<form action="{{ route('comments.store') }}" method="post" class="comment-add-form">
+<form action="{{ route('comments.store') }}" method="POST" class="comment-add-form">
 	@csrf
 
 	<div>
-
+		
 		<h4 class="comments-heading">
 			New comment:
         </h4>
@@ -23,7 +23,9 @@
 
 	</div>
 
-	<input type="hidden" name="post_id" value="{{ $post->id }}">
+	@php
+		session()->put('post_id', $post->id);
+	@endphp
 
 </form>
 

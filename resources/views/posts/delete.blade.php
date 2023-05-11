@@ -42,7 +42,6 @@
         </footer>
 
         @include('partials.files')
-        
         @include('tags.show')
 
     </article>

@@ -59,7 +59,7 @@ class PostController extends Controller
      */
     public function store(SavePostRequest $request)
     {
-        $post = auth()->user()->posts()->create(
+        $post = $request->user()->posts()->create(
             $request->all()
         );
 

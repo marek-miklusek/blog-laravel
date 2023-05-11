@@ -18,7 +18,7 @@ class UserController extends Controller
 
         return view('posts.index', [
             'posts' => $user->posts,
-            'title' => 'My beautiful posts'
+            'title' => 'My beautiful posts',
         ]);
     }
 }

@@ -29,9 +29,7 @@
                         <li class="edit-files">
                             <img src="{{ $file->imgFile($file) }}" alt="" class="img-file">
                             {{ $file->name }}
-                            <a href="{{ url('delete', $file->id) }}" class="delete-file float-end">
-                                x
-                            </a>
+                            <a href="{{ url('delete', $file->id) }}" class="delete-file float-end">x</a>
                         </li>
                     @endforeach
                 </ul>

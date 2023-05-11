@@ -17,7 +17,6 @@
             <p class="errors">{{ $message }}</p>
         @enderror
 
-
         <p>
             <input class="input" name="password" type="password" placeholder="password">
         </p>
@@ -25,13 +24,10 @@
             <p class="errors">{{ $message }}</p>
         @enderror
 
-        
         <div>
             <input type="checkbox" name="remember">
             <span>Remember me</span>
-            <button class="btn login-btn">
-                Log in
-            </button>
+            <button class="btn login-btn">Log in</button>
         </div>
 
         @if (Route::has('password.request'))

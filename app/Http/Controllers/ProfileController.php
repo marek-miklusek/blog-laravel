@@ -48,7 +48,7 @@ class ProfileController extends Controller
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;
         }
-        // Handle image upload
+        
 		$this->uploadImage($request->user(), $request->file('avatar'));
 
         $request->user()->save();

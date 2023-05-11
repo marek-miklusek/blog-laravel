@@ -3,7 +3,6 @@
 <form method="POST" action="{{ route('profile.destroy') }}">
     @csrf
     @method('DELETE')
-
     <button class="btn btn-outline-danger">Delete</button>
 </form>
 

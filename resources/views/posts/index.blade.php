@@ -8,7 +8,6 @@
     <h1 class="user-heading">{{ isset($title) ? $title : '' }}</h1>
     
     <ol>
-
         @forelse ($posts as $post)
             <li>
                 @include('posts.article', ['type' => 'listing'])
@@ -16,7 +15,6 @@
         @empty
             <h4 class="text-center">nothing to show :(</h4>
         @endforelse
-
     </ol>
 
 @endsection
